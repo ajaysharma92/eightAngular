@@ -13,13 +13,11 @@ export class ReactiveFormsComponent implements OnInit {
   reativeForm: FormGroup;
 
   ngOnInit() {
-    this.reativeForm = this.fb.group({
-      
-    })
+    //this.reativeForm = this.fb.group({})
   }
 
-  onSubmit(data){
+  /*onSubmit(data){
     console.log(data);
-  }
+  }*/
 
 }
