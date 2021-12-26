@@ -1,0 +1,13 @@
+/* .alert{
+    z-index: 9999;
+    top: 20%;
+    transform: translate(50%, -50%);
+    right: 50%;
+} */
+
+.alert-bg{
+    top: 0;
+    left: 50%;
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.0);
+}

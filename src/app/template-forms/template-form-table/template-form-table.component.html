@@ -1,0 +1,92 @@
+<div #empTableView>
+    <div class="row mx-0 my-3 header">
+        <div class="col-sm-6 col-xs-12">
+            <label mat-label class="m-0 py-1">List of data <mat-icon matTooltip="List of all the document data" matTooltipPosition="right" aria-hidden="false" aria-label="home">info</mat-icon></label>
+        </div>
+        <div class="col-sm-6 col-xs-12 text-right">
+            <button mat-raised-button color="primary" (click)="addNewEmp()"><mat-icon>person_add_alt</mat-icon> Add New Employee</button>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <app-alert></app-alert>
+    <div class="row mx-0 mt-3">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">       
+            <table class="table table-sm table-bordered w-100 bg-light m-0" mat-table [dataSource]="employeeLists" #myTable matSort>
+
+                <ng-container matColumnDef="id">
+                    <!-- <th *matHeaderCellDef mat-sort-header>S.No</th>
+                    <td class="align-middle px-2" mat-cell *matCellDef="let element">{{element.id}}</td> -->
+                    <th *matHeaderCellDef mat-sort-header> S.No </th>
+                    <td class="align-middle px-2" *matCellDef="let i = index">{{this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize}}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="fName">
+                    <th *matHeaderCellDef mat-sort-header>Name</th>
+                    <td class="align-middle px-2" mat-cell  *matCellDef="let element">{{element.fName}} {{element.lName}}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="location">
+                    <th *matHeaderCellDef mat-sort-header>Location</th>
+                    <td class="align-middle px-2" mat-cell  *matCellDef="let element">{{element.location}}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="chksubscribe">
+                    <th *matHeaderCellDef mat-sort-header>Subscribed</th>
+                    <td class="align-middle px-2" mat-cell  *matCellDef="let element">
+                        <span class="badge font-weight-light" [ngClass]="[element.chksubscribe ? 'badge-success' : 'badge-danger']">{{element.chksubscribe ? 'Yes' : 'No'}}</span>
+                    </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="avatar">
+                    <th *matHeaderCellDef>Profile Image</th>
+                    <td class="align-middle p-2" mat-cell  *matCellDef="let element">
+                        <img [src]="element.avatar" style="width: auto;height: 50px" [alt]="element.fName+' '+element.lName"  [matTooltip]="element.fName+' '+element.lName"/>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th *matHeaderCellDef>Action</th>
+                    <td *matCellDef="let element">
+                        <button class="btn btn-outline-warning" (click)="onClickAction('edit', element.id)" mat-icon-button color="accent" type="button" matTooltip="Edit Data"><mat-icon>edit_note</mat-icon></button>
+                        <button class="btn btn-outline-danger" (click)="onClickAction('delete', element)" mat-icon-button color="warn" type="button" matTooltip="Delete Data"><mat-icon>delete_forever</mat-icon></button>
+                        <button class="btn btn-outline-primary" (click)="onClickAction('view', element.id)" mat-icon-button color="primary" type="button" matTooltip="View Data"><mat-icon>visibility</mat-icon></button>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="empDisplayColumn" ></tr>
+                <tr mat-row *matRowDef="let row; columns: empDisplayColumn" ></tr>
+            </table>
+            <table *ngIf="!employeeLists">
+                <tr>
+                    <td style="text-align: center;" [attr.colspan]="empDisplayColumn.length">
+                    No Records Found!
+                    </td>
+                </tr>
+            </table>
+            <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+                <mat-progress-spinner 
+                  color="primary" 
+                  mode="indeterminate">
+                </mat-progress-spinner>
+            </mat-card>
+
+            <mat-paginator
+                #paginator 
+                [hidden]="!employeeLists" 
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons 
+                aria-label="Select page of periodic elements"
+                class="border bg-light border-top-0">
+            </mat-paginator>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <mat-card class="mat-elevation-z8">
+                <mat-card-header class="text-center">
+                    <mat-card-title><h1 class="display-4">Total Users</h1></mat-card-title>
+                    <mat-card-title><h1 class="display-3">{{empDataCount}}</h1></mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

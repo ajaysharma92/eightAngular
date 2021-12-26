@@ -1,0 +1,171 @@
+<app-alert></app-alert>
+<div class="row mx-0">
+    <!--<div class="offset-lg-1 col-lg-5 col-md-6 col-sm-12 col-12">
+        <form class="col-lg-10 col-md-12 col-12 p-0" #templateDataForm="ngForm" autocomplete="off" (ngSubmit)="onSubmit(templateDataForm)">
+            <div class="row mx-0 mb-2">
+                <div class="col-md-6 col-sm-12 col-12 p-0 pr-md-2">
+                    <label for="fName"><span class="small text-danger">*</span> First Name:</label>
+                    <input type="text" class="form-control" id="fName" name="fName" #fName="ngModel" [(ngModel)]="model.fName" required minlength="3" maxlength="10" [ngClass]="{'is-invalid' : fName.touched && fName.invalid, 'is-valid' : fName.valid}">
+                    <div class="invalid-feedback" *ngIf="fName.touched">
+                        <p *ngIf="fName.errors?.required">First Name is Required!!!</p>
+                        <p *ngIf="fName.errors?.minlength">First Name min 3 characters are required!!!</p>
+                    </div>                   
+                </div>
+                <div class="col-md-6 col-sm-12 col-12 p-0">
+                    <label for="lName"><span class="small text-danger">*</span> Last Name:</label>
+                    <input type="text" class="form-control" id="lName" name="lName" #lName="ngModel" [(ngModel)]="model.lName" required minlength="3" maxlength="10" [ngClass]="{'is-invalid' : lName.touched && lName.invalid, 'is-valid' : lName.valid}">
+                    <div class="invalid-feedback" *ngIf="lName.invalid">
+                        <p *ngIf="lName.errors?.required">Last Name is Required!!!</p>
+                        <p *ngIf="lName.errors?.minlength">Last Name min 3 characters are required!!!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="emailId"><span class="small text-danger">*</span> Email Id:</label>
+              <input type="email" class="form-control" id="emailId" aria-describedby="emailHelp" name="emailId" #emailId="ngModel" [(ngModel)]="model.emailId" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [ngClass]="{'is-invalid' : emailId.touched && emailId.invalid, 'is-valid' : emailId.valid}">
+              <div class="invalid-feedback" *ngIf="emailId.touched">
+                <div *ngIf="emailId.errors?.required">Email is a required field!</div>
+                <div *ngIf="emailId.errors?.pattern">This is not a valid Email!!!</div>
+              </div>
+            </div>
+            <div class="row mx-0 mb-2" ngModelGroup="passwords" #passwords="ngModelGroup" appCheckPassword>
+                <div class="col-md-6 col-sm-12 col-12 p-0 pr-md-2">
+                    <label for="passwordA"><span class="small text-danger">*</span> Password:</label>
+                    <input type="password" class="form-control" id="passwordA" name="passwordA" #passwordA="ngModel" [(ngModel)]="model.passwordA" required minlength="5" maxlength="8">
+                </div>
+                <div class="col-md-6 col-sm-12 col-12 p-0">
+                    <label for="passwordB"><span class="small text-danger">*</span> Repeat-Password:</label>
+                    <input type="password" class="form-control" id="passwordB" name="passwordB" [disabled]="!passwordA.value" #passwordB="ngModel" [(ngModel)]="model.passwordB" required [ngClass]="{'is-invalid' : !chkPassword && passwordB.touched, 'is-valid' : chkPassword}" minlength="5" maxlength="8" (input)="comparePassword()">
+                </div>
+            </div>
+            <div *ngIf="passwordB.invalid && (passwordA.dirty || passwordA.touched)" class="small text-danger">Please confirm your password.</div>
+            <div *ngIf="passwords.errors?.passwordCheck && (passwordB.dirty || passwordB.touched)" class="small text-danger">Passwords do not match.</div>
+            <div *ngIf="passwordB.errors?.minlength" class="small text-danger">Password length must be contain min 5 characters.</div>
+
+            <div class="row mx-0">
+                <div class="col-md-6 col-sm-12-col-12 p-0">
+                    <label for="exampleInputPassword1" class="mr-3">Gender: </label>
+                    <div class="form-group">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="genderM" name="gender" class="custom-control-input" value="Male"  [(ngModel)]="model.gender">
+                          <label class="custom-control-label" for="genderM">Male</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="genderF" name="gender" class="custom-control-input" value="Female" [(ngModel)]="model.gender">
+                          <label class="custom-control-label" for="genderF">Female</label>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-6 col-sm-12-col-12 pt-3">
+                    <app-counter [minNumber]="15" [maxNumber]="30"></app-counter>
+                </div>
+            </div>
+             
+             <div class="form-group">
+                <label for="usrLocation"><span class="small text-danger">*</span> Location:</label>
+                <div class="form-inline">
+                <select class="form-control form-control-sm" required #usrCountry="ngModel" [(ngModel)]="model.usrCountry" name="usrLocation" id="usrLocation" (ngModelChange)="setCountryFlag($event)" [ngClass]="[usrCountry.invalid ? 'col-12' : '']" [class.is-invalid]="usrCountry.invalid && usrCountry.touched">
+                    <option selected value="">-- Choose your Country --</option>
+                    <ng-container *ngFor="let countryList of countryLists">
+                        <option [value]="countryList.alpha2Code">{{countryList.name}}</option>
+                    </ng-container>
+                    </select>
+                    <span *ngIf="usrCountry.valid" class="setFlagImage ml-2 pl-5 rounded shadow-sm" [ngClass]="[usrCountry.invalid ? 'd-none' : 'd-block']" [style.backgroundImage]="'url(https://flagcdn.com/'+flagName+'.svg)'"></span>
+                </div>
+                <div class="small text-danger" *ngIf="usrCountry.invalid && usrCountry.touched">Select country is required</div>
+            </div>
+           <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="chkFormTxt" name="chkFormTxt" required #chkFormTxt="ngModel" [(ngModel)]="model.chkFormTxt">
+              <label class="form-check-label" for="chkFormTxt">I have verified all the details before submit the data.</label>
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="chkSubTxt" name="chkSubTxt" #chkSubTxt="ngModel" [(ngModel)]="model.chkSubTxt">
+              <label class="form-check-label" for="chkSubTxt">I would like to Subscribe.</label>
+            </div>
+            <!--<button type="submit" class="btn btn-primary float-right rounded-0" [disabled]="!templateDataForm.valid" (click)="onSubmit($event)">Submit</button>-- ->
+            <button type="submit" class="btn btn-primary float-right rounded-0" [disabled]="!templateDataForm.valid">Submit</button>
+            <button type="reset" class="btn btn-link float-right text-muted">Cancel</button>
+        </form>
+    </div>-->
+    
+    <div class="col-lg-5 col-md-6 col-sm-12 col-12">
+        <h3>List of data</h3>
+        <!--<mat-table cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)" [dataSource]="employeeLists" class="table">
+            <ng-container *ngFor="let column of columns; let i = index" [matColumnDef]="column.name">
+                <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x">
+                    {{column.title}}
+                </mat-header-cell>
+
+                <mat-cell *matCellDef="let element">{{element[column.name]}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="empDisplayColumn" class="tableHeaderRow" #tableHeaderRow></mat-header-row>
+            <mat-row *matRowDef="let row; columns: empDisplayColumn"></mat-row>
+        </mat-table>-->
+
+    <table class="table table-bordered my-table mat-elevation-z8 table-sm" mat-table [dataSource]="employeeLists" #myTable>
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>S.No</th>
+            <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fName">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.fName}} {{element.lName.includes("(") ? 
+                (element.lName | slice:0:element.lName.indexOf("(")) : element.lName}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="usrLocation">
+            <th mat-header-cell *matHeaderCellDef>Location</th>
+            <td mat-cell *matCellDef="let element">{{element.usrLocation || element.usrCountry}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="chkSubTxt">
+            <th mat-header-cell *matHeaderCellDef>Subscribed</th>
+            <td mat-cell *matCellDef="let element">{{element.chkSubTxt ? 'True' : 'False'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+                <div class="btn-group">
+                    <button class="btn btn-warning btn-sm" type="button">Edit</button><button class="btn btn-danger btn-sm" type="button">Delete</button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="empDisplayColumn" ></tr>
+        <tr mat-row *matRowDef="let row; columns: empDisplayColumn" ></tr>
+
+
+            <!--<thead class="thead-light">
+                <tr>
+                    <th class="py-1">#S.no</th>
+                    <th class="py-1">Name</th>
+                    <th class="py-1">Location</th>
+                    <th class="py-1">Subscribed</th>
+                    <th class="py-1">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let employeeList of employeeLists; index as i">
+                    <td>{{i+1}}</td>
+                    <!-- <td>{{employeeList.fName}} {{employeeList.lName | slice:0:employeeList.lName.includes("(") ? employeeList.lName.indexOf("(") : null}}</td> - ->
+                    <td>{{employeeList.fName}} {{employeeList.lName.includes("(") ? 
+                                                (employeeList.lName | slice:0:employeeList.lName.indexOf("(")) : 
+                                                employeeList.lName}}</td>
+                <td>{{employeeList.usrLocation || employeeList.usrCountry}}</td>
+                    <td class="text-center"><span class="badge" [ngClass]="[employeeList.chkSubTxt ? 'badge-success' : 'badge-danger']" >{{employeeList.chkSubTxt ? 'Yes' : 'No'}}</span></td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-sm btn-warning py-0" (click)="onView(employeeList.fName, i+1)">View</button>
+                            <button class="btn btn-sm btn-danger py-0" (click)="onDelete(employeeList.fName, i+1)">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>-->
+        </table>
+    </div>
+</div>

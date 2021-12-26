@@ -1,0 +1,56 @@
+<h1 class="display-4">HTTP Request Demo</h1>
+
+<div class="input-group my-2 col-12 col-sm-12 col-md-5">
+  <label for="userName" class="font-weight-bold mt-2 mb-0 mr-2">Git User Name: </label>
+  <input id="userName" class="form-control" type="text" name="userName" [(ngModel)]="userName" placeholder="Enter Repository Username" (input)="checkInputField()">
+  <button type="button" class="btn rounded-0" mat-raised-button color="primary" [disabled]="!isAllowed" (click)="getRepos()">Get Repository</button>
+</div>
+
+<!--<div *ngIf="loading" class="display-4 mx-auto d-block my-5">
+Loading...
+</div>-->
+
+<!-- datatable [dtOptions]="dtOptions" -->
+<table class="table table-bordered">
+  <thead class="table-active">
+    <tr>
+      <th scope="col" [attr.aria-sort]="ariaSort['id']" sortable='id' (sort)="onSort($event)">#ID</th>
+      <th scope="col" [attr.aria-sort]="ariaSort['name']" sortable='name' (sort)="onSort($event)">Name</th>
+      <th scope="col" [attr.aria-sort]="ariaSort['htmlurl']" sortable='html_url' (sort)="onSort($event)">HTML Url</th>
+      <th scope="col" [attr.aria-sort]="ariaSort['description']" sortable='description' (sort)="onSort($event)">Description</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="repos?.length != 0">
+      <tr *ngFor="let repo of repos"><!--*ngFor="let country of countries;"-->
+        <td>{{repo.id}}</td>
+        <td>{{repo.name}}</td>
+        <td>{{repo.html_url}}</td>
+        <td>{{repo.description}}</td>
+      </tr>
+  </tbody>
+  <tbody *ngIf="repos?.length == null">
+    <tr><td [colSpan]="4" class="text-center">Data Not Available</td></tr>
+  </tbody>
+  <tbody *ngIf="loading">
+    <tr>
+      <td [colSpan]="4">
+        <div class="col-4 mx-auto d-block">
+          <circle-progress
+          [percent]="100"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="10000"
+          ></circle-progress>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table><!---->
+
+<div *ngIf="errorMessage" class="alert alert-warning">
+  <b>!Warning : {{ errorMessage | json }}</b>
+</div>

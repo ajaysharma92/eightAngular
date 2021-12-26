@@ -1,0 +1,30 @@
+[data-theme="dark"] {
+  background-color: #111 !important;
+  color: #eee;
+}
+
+[data-theme="dark"] .bg-light {
+  background-color: #333 !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: #000 !important;
+}
+
+[data-theme="dark"] .bg-black {
+  background-color: #eee !important;
+}
+/* You can add global styles to this file, and also import other style files */
+/*form label:not(.custom-control-label){
+    font-weight: bold;
+}*/
+/*button[disabled] {
+    background: #ccc!important;
+    color: #fff!important;
+    border: 1px solid #ccc!important;
+}*/
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-dialog-container{box-shadow: none;background-color: transparent;}
+.mat-dialog-content{margin: 0 -16px!important;}
+[hidden] {display: none !important;}

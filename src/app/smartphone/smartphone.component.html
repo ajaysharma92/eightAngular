@@ -1,0 +1,32 @@
+<div class="row mx-0 mt-3">
+    <div class="col-md-12">
+    <table class="table table-bordered" [ngClass]="[deviceDatas.length == 0 ? 'table-danger' : 'table-success']" [@showHideState]="toggle">
+      <thead class="thead-primary">
+        <tr>
+          <th>Modal Number</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container>
+          <tr *ngFor="let deviceData of deviceDatas">
+              <td>{{ deviceData.id }}</td>
+              <td>{{ deviceData.name }}</td>
+              <td>{{ deviceData.price | currency}}</td>
+               <td><button class="btn btn-sm btn-light" [routerLink]="['/smartphone', deviceData.id]" (click)="onSelect(deviceData.name)">View Info</button></td>
+            </tr>
+        </ng-container>     
+        <tr *ngIf="deviceDatas.length == 0">
+          <td class="text-center" [colSpan]="5">No Records</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+</div>
+<div class="row mx-0">
+  <div class="col-12">
+    <label>Total Smartphone Available: <app-phonechild [phoneCount]="fromParent" (showHideEvent)="receiveChildMessg($event)"></app-phonechild></label>
+  </div>
+</div>

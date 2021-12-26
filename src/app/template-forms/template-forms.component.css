@@ -1,0 +1,8 @@
+.setFlagImage{
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    display: block;
+}

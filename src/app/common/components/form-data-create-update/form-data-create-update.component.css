@@ -1,0 +1,10 @@
+/*mat-icon{position: relative; top:5px}*/
+:ng-deep mat-step-header:hover, .mat-step-header.cdk-keyboard-focused, .mat-step-header.cdk-program-focused, .mat-step-header:hover {background-color: transparent;}
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  .example-radio-button {
+    margin: 5px;
+  }

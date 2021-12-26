@@ -1,0 +1,13 @@
+.header mat-icon{
+    font-size: 18px;
+    position: relative;
+    top: 4px;
+}
+  button{
+      outline: none;
+  }
+
+  ::ng-deep .snackbar-style{
+    background-color: #d42b0d;
+    color:white;
+  }

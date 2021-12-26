@@ -1,0 +1,11 @@
+<div class="alert-bg position-fixed position-absolute w-50">
+
+    <div *ngFor="let alert of alerts" class="{{cssClass(alert)}} col-10 rounded-0 shadow ml-auto mr-3 mt-3 position-relative" role="alert">
+        <a class="close text-white" (click)="removeAlert(alert)">&times;</a>
+        <span [innerHTML]="alert.message" class="text-white"></span>
+    </div>
+
+    <!-- <div class="alert alert-success col-10 rounded-0 shadow ml-auto mr-3 mt-3 position-relative" role="alert">
+        A simple success alert—check it out!
+      </div> -->
+</div>
